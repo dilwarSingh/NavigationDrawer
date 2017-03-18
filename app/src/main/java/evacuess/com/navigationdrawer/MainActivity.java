@@ -3,7 +3,6 @@ package evacuess.com.navigationdrawer;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -36,12 +35,11 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imgNavHeaderBg, imgProfile;
     private TextView txtName, txtWebsite;
     private Toolbar toolbar;
-    private FloatingActionButton fab;
 
     // urls to load navigation header background image
     // and profile image
-    private static final String urlNavHeaderBg = "raw/nav_bg.jpg";
-    private static final String urlProfileImg = "raw/nhfwrfw.png";
+    private static final String urlNavHeaderBg = "http://api.androidhive.info/images/nav-menu-header-bg.jpg";
+    private static final String urlProfileImg = "";
 
     // index to identify current nav menu item
     public static int navItemIndex = 0;
@@ -73,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
-        fab = (FloatingActionButton) findViewById(R.id.fab);
 
         // Navigation view header
         navHeader = navigationView.getHeaderView(0);
@@ -84,14 +81,6 @@ public class MainActivity extends AppCompatActivity {
 
         // load toolbar titles from string resources
         activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         // load nav menu header data
         loadNavHeader();
@@ -151,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
             drawer.closeDrawers();
 
             // show or hide the fab button
-            toggleFab();
+
             return;
         }
 
@@ -178,7 +167,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // show or hide the fab button
-        toggleFab();
 
         //Closing drawer on item click
         drawer.closeDrawers();
@@ -373,10 +361,5 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // show or hide the fab
-    private void toggleFab() {
-        if (navItemIndex == 0)
-            fab.show();
-        else
-            fab.hide();
-    }
+
 }

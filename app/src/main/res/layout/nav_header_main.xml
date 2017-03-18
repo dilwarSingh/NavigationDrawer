@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="@string/dilwar_singh"
+        android:text="@string/dilwar"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="24sp" />
 
@@ -34,7 +34,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/dilwarsingh2706_gmail_com"
+        android:text="@string/dilwar_gmail_com"
         android:textSize="18sp" />
 
 </LinearLayout>

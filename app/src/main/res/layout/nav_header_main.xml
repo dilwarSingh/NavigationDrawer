@@ -34,7 +34,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/dilwarsingh2706_gmail_com"
+        android:text="sainideepu251@gmail.com"
         android:textSize="18sp" />
 
 </LinearLayout>

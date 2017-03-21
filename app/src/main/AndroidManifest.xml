@@ -22,7 +22,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".AboutUsActivity" />
-        <activity android:name=".PrivacyPolicyActivity"></activity>
+        <activity android:name=".PrivacyPolicyActivity">
+
+        </activity>
     </application>
 
 </manifest>

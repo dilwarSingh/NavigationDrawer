@@ -4,11 +4,13 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -21,6 +23,7 @@ public class NavigationController extends AppCompatActivity {
     NavigationView navigationView;
     DrawerLayout drawerLayout;
     ActionBar actionBar;
+    View fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,8 @@ public class NavigationController extends AppCompatActivity {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         navigationView = (NavigationView) findViewById(R.id.navigarionID);
 
+
+        fragment = findViewById(R.id.homeId);
 
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
@@ -50,36 +55,53 @@ public class NavigationController extends AppCompatActivity {
                     //drawerOpened = true;
                 }
             };
+
             mDrawerToggle.setDrawerIndicatorEnabled(true);
             drawerLayout.setDrawerListener(mDrawerToggle);
             mDrawerToggle.syncState();
         }
+        navigationView.setSelected(true);
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.setCustomAnimations(android.R.anim.fade_in,
+                        android.R.anim.fade_out);
 
                 switch (item.getItemId()) {
                     case R.id.nav_home:
-                        Toast.makeText(getApplicationContext(), "Home", Toast.LENGTH_LONG).show();
+                        fragment_home fragHome = new fragment_home();
+                        transaction.replace(R.id.fragmentContainer, fragHome);
+                        transaction.addToBackStack(null);
+                        transaction.commitAllowingStateLoss();
+                        Log.d("frag", "1");
                         break;
+
                     case R.id.nav_photos:
-                        Toast.makeText(getApplicationContext(), item.getTitle(), Toast.LENGTH_LONG).show();
+                        Log.d("frag", "2");
+                        Toast.makeText(getApplicationContext(), "photos", Toast.LENGTH_LONG).show();
+                        photoFragment fragPhoto = new photoFragment();
+
+                        transaction.replace(R.id.fragmentContainer, fragPhoto);
+                        transaction.addToBackStack(null);
+                        transaction.commitAllowingStateLoss();
+
                         break;
                     case R.id.nav_about_us:
-                        Toast.makeText(getApplicationContext(), item.getTitle(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "about us", Toast.LENGTH_LONG).show();
                         break;
                     case R.id.nav_movies:
-                        Toast.makeText(getApplicationContext(), item.getTitle(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "movies", Toast.LENGTH_LONG).show();
                         break;
                     case R.id.nav_notifications:
-                        Toast.makeText(getApplicationContext(), item.getTitle(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "notifications", Toast.LENGTH_LONG).show();
                         break;
                     case R.id.nav_privacy_policy:
-                        Toast.makeText(getApplicationContext(), item.getTitle(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "privacy", Toast.LENGTH_LONG).show();
                         break;
                     case R.id.nav_settings:
-                        Toast.makeText(getApplicationContext(), item.getTitle(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "settings", Toast.LENGTH_LONG).show();
                         break;
 
                     default:
@@ -87,13 +109,17 @@ public class NavigationController extends AppCompatActivity {
                         break;
 
                 }
+
                 drawerLayout.closeDrawers();
+
 
                 return true;
             }
         });
 
+
     }
+
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {

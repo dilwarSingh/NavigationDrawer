@@ -19,12 +19,6 @@
             android:isScrollContainer="true"
             app:titleTextColor="@android:color/white" />
 
-        <fragment
-            android:id="@+id/fragmentContainer"
-            android:name="evacuess.com.navigationdrawer.fragment_Notification"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
     </LinearLayout>
 
     <android.support.design.widget.NavigationView

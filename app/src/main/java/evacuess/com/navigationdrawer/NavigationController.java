@@ -62,61 +62,70 @@ public class NavigationController extends AppCompatActivity {
         }
         navigationView.setSelected(true);
 
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.setCustomAnimations(android.R.anim.fade_in,
-                        android.R.anim.fade_out);
 
-                switch (item.getItemId()) {
-                    case R.id.nav_home:
-                        fragment_home fragHome = new fragment_home();
-                        transaction.replace(R.id.fragmentContainer, fragHome);
-                        transaction.addToBackStack(null);
-                        transaction.commitAllowingStateLoss();
-                        Log.d("frag", "1");
-                        break;
-
-                    case R.id.nav_photos:
-                        Log.d("frag", "2");
-                        Toast.makeText(getApplicationContext(), "photos", Toast.LENGTH_LONG).show();
-                        photoFragment fragPhoto = new photoFragment();
-
-                        transaction.replace(R.id.fragmentContainer, fragPhoto);
-                        transaction.addToBackStack(null);
-                        transaction.commitAllowingStateLoss();
-
-                        break;
-                    case R.id.nav_about_us:
-                        Toast.makeText(getApplicationContext(), "about us", Toast.LENGTH_LONG).show();
-                        break;
-                    case R.id.nav_movies:
-                        Toast.makeText(getApplicationContext(), "movies", Toast.LENGTH_LONG).show();
-                        break;
-                    case R.id.nav_notifications:
-                        Toast.makeText(getApplicationContext(), "notifications", Toast.LENGTH_LONG).show();
-                        break;
-                    case R.id.nav_privacy_policy:
-                        Toast.makeText(getApplicationContext(), "privacy", Toast.LENGTH_LONG).show();
-                        break;
-                    case R.id.nav_settings:
-                        Toast.makeText(getApplicationContext(), "settings", Toast.LENGTH_LONG).show();
-                        break;
-
-                    default:
-                        Toast.makeText(getApplicationContext(), "Default case", Toast.LENGTH_LONG).show();
-                        break;
-
-                }
-
-                drawerLayout.closeDrawers();
-
-
+                selectedNavItem(item.getItemId());
                 return true;
             }
         });
 
+        selectedNavItem(R.id.nav_home);
+        navigationView.getMenu().getItem(0).setChecked(true);
+
+    }
+
+    public void selectedNavItem(int item) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(android.R.anim.fade_in,
+                android.R.anim.fade_out);
+
+        switch (item) {
+            case R.id.nav_home:
+                fragment_home fragHome = new fragment_home();
+                transaction.replace(R.id.fragmentContainer, fragHome);
+                transaction.addToBackStack(null);
+                transaction.commitAllowingStateLoss();
+                Log.d("frag", "1");
+                getSupportActionBar().setTitle("Home");
+                break;
+
+            case R.id.nav_photos:
+                Log.d("frag", "2");
+                Toast.makeText(getApplicationContext(), "photos", Toast.LENGTH_LONG).show();
+                photoFragment fragPhoto = new photoFragment();
+
+                transaction.replace(R.id.fragmentContainer, fragPhoto);
+                transaction.addToBackStack(null);
+                transaction.commitAllowingStateLoss();
+                getSupportActionBar().setTitle("Photos");
+
+                break;
+            case R.id.nav_about_us:
+                Toast.makeText(getApplicationContext(), "about us", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.nav_movies:
+                Toast.makeText(getApplicationContext(), "movies", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.nav_notifications:
+                Toast.makeText(getApplicationContext(), "notifications", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.nav_privacy_policy:
+                Toast.makeText(getApplicationContext(), "privacy", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.nav_settings:
+                Toast.makeText(getApplicationContext(), "settings", Toast.LENGTH_LONG).show();
+                break;
+
+            default:
+                Toast.makeText(getApplicationContext(), "Default case", Toast.LENGTH_LONG).show();
+                break;
+
+        }
+
+        drawerLayout.closeDrawers();
 
     }
 

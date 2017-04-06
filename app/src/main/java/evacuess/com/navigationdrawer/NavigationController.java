@@ -4,6 +4,8 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -35,7 +37,7 @@ public class NavigationController extends AppCompatActivity {
         navigationView = (NavigationView) findViewById(R.id.navigarionID);
 
 
-        fragment = findViewById(R.id.homeId);
+        //      fragment = findViewById(R.id.homeId);
 
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
@@ -78,30 +80,39 @@ public class NavigationController extends AppCompatActivity {
     }
 
     public void selectedNavItem(int item) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+     /*   FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.setCustomAnimations(android.R.anim.fade_in,
                 android.R.anim.fade_out);
-
+*/
         switch (item) {
             case R.id.nav_home:
-                fragment_home fragHome = new fragment_home();
-                transaction.replace(R.id.fragmentContainer, fragHome);
-                transaction.addToBackStack(null);
-                transaction.commitAllowingStateLoss();
                 Log.d("frag", "1");
+                Toast.makeText(getApplicationContext(), "home", Toast.LENGTH_LONG).show();
+
+                Fragment fragHome = new fragment_home();
+                FragmentManager fm = getSupportFragmentManager();
+
+                FragmentTransaction transaction = fm.beginTransaction();
+                transaction.replace(R.id.frammuu, fragHome);
+                transaction.commit();
+
+     /*        transaction.addToBackStack(null);
+                transaction.commitAllowingStateLoss();
+*/
                 getSupportActionBar().setTitle("Home");
                 break;
 
             case R.id.nav_photos:
                 Log.d("frag", "2");
                 Toast.makeText(getApplicationContext(), "photos", Toast.LENGTH_LONG).show();
-                photoFragment fragPhoto = new photoFragment();
 
-                transaction.replace(R.id.fragmentContainer, fragPhoto);
-                transaction.addToBackStack(null);
-                transaction.commitAllowingStateLoss();
+                Fragment fragPhoto = new photoFragment();
+                FragmentManager fm1 = getSupportFragmentManager();
+                FragmentTransaction transaction1 = fm1.beginTransaction();
+                transaction1.replace(R.id.frammuu, fragPhoto);
+                transaction1.commit();
+
                 getSupportActionBar().setTitle("Photos");
-
                 break;
             case R.id.nav_about_us:
                 Toast.makeText(getApplicationContext(), "about us", Toast.LENGTH_LONG).show();
